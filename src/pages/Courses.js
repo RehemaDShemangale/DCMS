@@ -4,9 +4,12 @@ import { View, Image} from 'react-native';
 import { Text } from 'galio-framework'
 import {Entypo,AntDesign} from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity, TouchableNativeFeedback, TouchableHighlight } from 'react-native-gesture-handler';
+import { connect } from "react-redux";
+import * as actions from '../../actions';
+import Color from "../constants/colors";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
-
-export default class courses extends Component{
+class courses extends Component{
 
   static navigationOptions={
     headerShown: false
@@ -30,7 +33,7 @@ Enrolled =()=>{
 
     <View>
     <View style={{backgroundColor:'#f1f2f6',borderRadius:5,marginBottom:15,height:255,alignItems:'center'}}>
-      <Image source={require('./assets/swahil.jpg')} style={{height:250,width:400}} />
+      <Image source={require('../../assets/user-13.jpg')} style={{height:250,width:400}} />
     </View>
 
     <Text style={{color:'rgba(88, 189, 255,5)',marginTop:15,paddingHorizontal:5,fontSize:17,marginBottom:10}}>Course Name:  KISWAHILI KWA WAANDISHI WA HABARI</Text>
@@ -57,7 +60,7 @@ Enrolled =()=>{
 
       <View>
       <View style={{backgroundColor:'#f1f2f6',borderRadius:5,marginBottom:15,height:255,alignItems:'center'}}>
-        <Image source={require('./assets/swahil.jpg')} style={{height:250,width:400}} />
+        <Image source={require('../../assets/user-13.jpg')} style={{height:250,width:400}} />
       </View>
   
       <Text style={{color:'rgba(88, 189, 255,5)',marginTop:15,paddingHorizontal:5,fontSize:17,marginBottom:10}}>Course Name:  KISWAHILI KWA WAANDISHI WA HABARI</Text>
@@ -83,21 +86,43 @@ Enrolled =()=>{
 
   }
 
-  else
+  else{
+    let id=this.props.navigation.state.params.id;
+    let proId=this.props.navigation.state.params.proId;
+    let course=this.props.app.Courses[proId];
+    //console.log("id",course[id])
+    //console.log("id",id)
       return(
 
           <View>
       
-          <Text style={{color:'rgba(88, 189, 255,5)',marginTop:15,paddingHorizontal:5,fontSize:17,marginBottom:10}}>Course Name:  KISWAHILI KWA WAANDISHI WA HABARI</Text>
-          <Text style={{marginTop:10,paddingHorizontal:5,fontSize:16,marginBottom:20,marginTop:20}}>Lessons</Text>
+          <Text 
+            style={{
+              color:Color.primary,
+              marginTop:15,
+              paddingHorizontal:5,
+              fontSize:RFPercentage(2.7),
+              marginBottom:10
+            }}
+          >Course Name: {course[id].title}</Text>
+          <Text 
+            style={{
+              marginTop:10,
+              paddingHorizontal:5,
+              fontSize:RFPercentage(2.5),
+              marginBottom:20,
+              marginTop:20
+            }}>Lessons</Text>
       
-          <TouchableOpacity>
-          <Text style={{backgroundColor:'#1e90ff',color:'white',textAlign:'center',textAlignVertical:'center',marginTop:10,height:40,borderRadius:10}}>LOGIN TO ENROLL</Text>
+          <TouchableOpacity
+              onPress={()=>this.props.navigation.navigate('LogIn')}
+          >
+            <Text style={{backgroundColor:'#1e90ff',color:'white',textAlign:'center',textAlignVertical:'center',marginTop:10,height:40,borderRadius:10}}>LOGIN TO ENROLL</Text>
           </TouchableOpacity>
           </View>
       
         );
-
+     }
       
 
 }
@@ -111,12 +136,19 @@ Enrolled =()=>{
       <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
         <AntDesign
             name="arrowleft"
-            color="rgba(88, 189, 255,5)"
-            size={20}
+            color={Color.primary}
+            size={25}
         />
         </TouchableOpacity>
         
-        <Text style={{color:'rgba(88, 189, 255,5)',fontWeight:'bold',fontSize:20,marginLeft:30}}>Courses</Text>
+        <Text 
+          style={{
+            color:Color.primary,
+            fontWeight:'bold',
+            fontSize:RFPercentage(3),
+            marginLeft:30
+          }}
+        >Course</Text>
 
       </View>
 
@@ -140,4 +172,7 @@ Enrolled =()=>{
 }
   }
   
-
+  const mapStateToProps = (state) => ({
+    app: state.app
+  });
+  export default connect(mapStateToProps,actions)(courses);

@@ -10,6 +10,9 @@
   "dependencies": {
     "@expo/vector-icons": "^10.1.0",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/netinfo": "^5.8.1",
+    "@redux-offline/redux-offline": "^2.5.2-expo.0",
+    "axios": "^0.19.2",
     "expo": "~37.0.3",
     "expo-linear-gradient": "^8.1.0",
     "galio-framework": "^0.6.3",
@@ -20,11 +23,16 @@
     "react-native-gesture-handler": "^1.6.1",
     "react-native-navbar": "^2.1.0",
     "react-native-reanimated": "^1.8.0",
+    "react-native-responsive-fontsize": "^0.4.3",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.7.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.9",
-    "react-navigation-stack": "^2.4.0"
+    "react-navigation-stack": "^2.4.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
