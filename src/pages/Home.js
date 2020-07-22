@@ -102,6 +102,50 @@ class Home extends Component{
             .catch(function (error) {
               console.log("error1",error);
             });
+
+            if(this.props.app.UserId != ""){
+              
+              let id=this.props.app.UserId.id;
+                  axios.get("https://darasa.uti.ac.tz/mobileapp/enrolled.php",{
+                      params: {
+                        id:id,
+                      }
+                    })
+                    .then(res => {
+
+                      console.log("success3",res.data)
+                      let data1=res.data;
+
+                      for(let k=0;k<data1.length;k++){
+                        let Nwdata = data1[k].course_id;
+                        this.props.updateEnrolled(Nwdata)
+                      }
+                    })
+                    .catch(function (error) {
+                      console.log("error2",error);
+                    });
+
+                    axios.get("https://darasa.uti.ac.tz/mobileapp/leason.php",{
+                      params: {
+                       // id:id,
+                      }
+                    })
+                    .then(res => {
+
+                      console.log("success3",res.data)
+                      let data1=res.data;
+
+                      for(let k=0;k<data1.length;k++){
+                        let Nwdata = data1[k];
+                        this.props.updateLessons(Nwdata)
+                      }
+                    })
+                    .catch(function (error) {
+                      console.log("error2",error);
+                    });
+
+            }
+
          }
           focus=()=>{
             this.setState({isLoggedIn:true})

@@ -6,7 +6,10 @@ import {
     UPDATE_INTNUMBER,
     UPDATE_PROGRAM,
     UPDATE_COURSE,
-    UPDATE_PHOTO
+    UPDATE_PHOTO,
+    UPDATE_ENROLLED,
+    UPDATE_LESSONS,
+    UPDATE_FILES
 } from '../actions/types';
 
 const initialState = {
@@ -16,7 +19,10 @@ const initialState = {
     Contacts:[],
     Program:{},
     Courses:{},
-    photo:''
+    photo:'',
+    enrolled:{},
+    lessons:{},
+    files:{}
 
 };
 
@@ -42,11 +48,46 @@ export default (state = initialState, action) => {
             };
             break;
 
-        case UPDATE_PHOTO:
+        case UPDATE_ENROLLED:
+            //console.log("action",action.payload)
+            return {
+                ...state,
+                enrolled:{
+                    ...state.enrolled,
+                    [action.payload]:action.payload
+                }
+            };
+            break;
+        
+        case UPDATE_FILES:
             console.log("action",action.payload)
             return {
                 ...state,
-                photo:action.payload
+                files:{
+                    ...state.files,
+                    [action.payload.lesson_id]:{
+                        ...state.lessons[action.payload.lesson_id],
+                        [action.payload.id]:{
+                            ...action.payload
+                        }
+                    }
+                }
+            };
+            break;
+
+        case UPDATE_LESSONS:
+            console.log("action",action.payload)
+            return {
+                ...state,
+                lessons:{
+                    ...state.lessons,
+                    [action.payload.course_id]:{
+                        ...state.lessons[action.payload.course_id],
+                        [action.payload.id]:{
+                            ...action.payload
+                        }
+                    }
+                }
             };
             break;
 

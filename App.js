@@ -7,7 +7,7 @@ import Lessons from './src/pages/Lessons';
 import Course from './src/pages/Courses';
 import Courses from './src/pages/Course';
 import LogIn from './src/pages/LogIn';
-import {ActivityIndicator,View} from 'react-native';
+import {ActivityIndicator,View,ImageBackground,Dimensions} from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { Provider, connect } from 'react-redux';
@@ -41,15 +41,17 @@ const Start = ({AppStart, rehydrate}) =>{
   }
   else{
     return(
-     <View 
+     <ImageBackground 
+        source={require('./assets/splash.png')}
        style={{
-         flex:1,
+         height:Dimensions.get('screen').height,
+         width:Dimensions.get('screen').width,
          alignItems:'center',
          justifyContent:'center'
         }}
      >
         <ActivityIndicator size="large" color={Color.primary} />
-     </View>
+     </ImageBackground>
     )
   }
 
