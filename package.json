@@ -12,7 +12,7 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/netinfo": "^5.8.1",
     "@redux-offline/redux-offline": "^2.5.2-expo.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "~37.0.3",
     "expo-file-system": "^8.1.0",
     "expo-linear-gradient": "^8.1.0",
